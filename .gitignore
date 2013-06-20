@@ -1,4 +1,18 @@
 #################
+## nvFX
+#################
+cmake_built
+doxygen/html
+doxygen/perlmod
+doxygen/nvFX.chm
+doxygen/log.txt
+samples/OpenGLSimpleMDLEffect
+ISF
+nvFx_GTC_2013.pptx
+Log_nvFX.txt
+*Log.txt
+
+#################
 ## Eclipse
 #################
 

@@ -1,0 +1,188 @@
+/**
+\page StateGroups Render-State Groups
+
+State groups are derived from the spec GL_NV_state_object
+
+\section SG State groups
+
+\subsection RS Rasterization state
+
+\code
+                                      Dynamic      Max
+    Property                          Allowed     Index      Default Value
+    --------------------------       ---------    -----      -------------
+    POINT_SIZE                          yes         1           1.0
+    POINT_SMOOTH                        no          1           FALSE
+    POINT_SPRITE                        no          1           FALSE
+    POINT_SPRITE_COORD_ORIGIN           no          1           UPPER_LEFT
+    LINE_WIDTH                          yes         1           1.0
+    LINE_SMOOTH                         no          1           FALSE
+    // pattern << 8 | (repeat-1)
+    COMBINED_LINE_STIPPLE_NV            yes         1           0x00FFFF00
+    LINE_STIPPLE_PATTERN                no          1           0xFFFF
+    LINE_STIPPLE_REPEAT                 no          1           1
+    LINE_STIPPLE                        no          1           FALSE
+    CULL_FACE                           no          1           FALSE
+    CULL_FACE_MODE                      no          1           BACK
+    FRONT_FACE                          no          1           CCW
+    POLYGON_SMOOTH                      no          1           FALSE
+    // POLYGON_MODE[0] = FRONT, POLYGON_MODE[1] = BACK
+    POLYGON_MODE                        no          2           FILL
+    POLYGON_OFFSET_FACTOR               yes         1           0
+    POLYGON_OFFSET_UNITS                yes         1           0
+    POLYGON_OFFSET_POINT                no          1           FALSE
+    POLYGON_OFFSET_LINE                 no          1           FALSE
+    POLYGON_OFFSET_FILL                 no          1           FALSE
+    POLYGON_STIPPLE                     no          1           FALSE
+    RASTERIZER_DISCARD                  no          1           FALSE
+\endcode
+
+\subsection CSS Color sample operations state
+\code
+                                      Dynamic      Max
+    Property                          Allowed     Index      Default Value
+    --------------------------       ---------    -----      -------------
+    ALPHA_TEST                          no          1           FALSE   
+    ALPHA_TEST_FUNC                     no          1           ALWAYS
+    ALPHA_TEST_REF                      yes         1           0
+    BLEND                               no         [1]          0
+    BLEND_SRC                           no         [1]          ONE
+    BLEND_SRC_RGB                       no         [1]          ONE
+    BLEND_SRC_ALPHA                     no         [1]          ONE
+    BLEND_DST                           no         [1]          ZERO
+    BLEND_DST_RGB                       no         [1]          ZERO
+    BLEND_DST_ALPHA                     no         [1]          ZERO
+    BLEND_EQUATION_RGBA_NV              no         [1]          FUNC_ADD
+    BLEND_EQUATION_RGB                  no         [1]          FUNC_ADD
+    BLEND_EQUATION_ALPHA                no         [1]          FUNC_ADD  
+    PER_DRAW_BUFFER_BLEND_FUNCTION_NV   no          1           FALSE
+    PER_DRAW_BUFFER_BLEND_EQUATION_NV   no          1           FALSE
+    PER_DRAW_BUFFER_BLEND_ENABLE_NV     no          1           FALSE
+    PER_DRAW_BUFFER_COLOR_WRITEMASK_NV  no          1           FALSE
+    // (r,g,b,a) treated as index (0,1,2,3) 
+    BLEND_COLOR                         yes         4           (0,0,0,0) 
+    FRAMEBUFFER_SRGB                    no          1           FALSE
+    DITHER                              no          1           TRUE
+    COLOR_LOGIC_OP                      no          1           FALSE
+    LOGIC_OP_MODE                       no          1           COPY
+    // Colormask is a bitmask, (r,g,b,a) are treated as bits (0,1,2,3)
+    COLOR_WRITEMASK                     no         [1]          0xF
+    MULTISAMPLE                         no          1           TRUE
+    SAMPLE_MASK                         no          1           FALSE
+    SAMPLE_MASK_VALUE                   yes        [2]          0xFFFFFFFF
+    SAMPLE_ALPHA_TO_ONE                 no          1           FALSE
+    SAMPLE_ALPHA_TO_COVERAGE            no          1           FALSE
+\endcode
+    
+\subsection DSTS Depth/stencil sample operations state
+
+\code
+                                      Dynamic      Max
+    Property                          Allowed     Index      Default Value
+    --------------------------       ---------    -----      -------------
+    DEPTH_TEST                          no          1           FALSE
+    DEPTH_FUNC                          no          1           LESS
+    DEPTH_WRITEMASK                     no          1           TRUE
+    DEPTH_CLAMP                         no          1           FALSE
+    DEPTH_BOUNDS_TEST_EXT               no          1           FALSE
+    // DEPTH_BOUNDS_EXT[0] = MIN, DEPTH_BOUNDS_EXT[1] = MAX
+    DEPTH_BOUNDS_EXT                    yes         2           (0.0, 1.0)
+    STENCIL_TEST                        no          1           FALSE
+    STENCIL_FUNC                        no          1           ALWAYS
+    STENCIL_VALUE_MASK                  yes         1           0xFFFFFFFF
+    STENCIL_REF                         yes         1           0
+    STENCIL_FAIL                        no          1           KEEP
+    STENCIL_PASS_DEPTH_FAIL             no          1           KEEP
+    STENCIL_PASS_DEPTH_PASS             no          1           KEEP
+    STENCIL_WRITEMASK                   yes         1           0xFFFFFFFF
+    STENCIL_FRONT_FUNC                  no          1           ALWAYS
+    STENCIL_FRONT_VALUE_MASK            yes         1           0xFFFFFFFF
+    STENCIL_FRONT_REF                   yes         1           0
+    STENCIL_FRONT_FAIL                  no          1           KEEP
+    STENCIL_FRONT_PASS_DEPTH_FAIL       no          1           KEEP
+    STENCIL_FRONT_PASS_DEPTH_PASS       no          1           KEEP
+    STENCIL_FRONT_WRITEMASK             yes         1           0xFFFFFFFF
+    STENCIL_BACK_FUNC                   no          1           ALWAYS
+    STENCIL_BACK_VALUE_MASK             yes         1           0xFFFFFFFF
+    STENCIL_BACK_REF                    yes         1           0
+    STENCIL_BACK_FAIL                   no          1           KEEP
+    STENCIL_BACK_PASS_DEPTH_FAIL        no          1           KEEP
+    STENCIL_BACK_PASS_DEPTH_PASS        no          1           KEEP
+    STENCIL_BACK_WRITEMASK              yes         1           0xFFFFFFFF
+\endcode
+
+\section INNVFX Stategroups in nvFX
+
+\subsection DECLSG Declaring state groups
+
+As many state groups can be created. The available state groups are :
+ - rasterization_state
+ - color_sample_state
+ - dst_state
+
+When declaring them, it is not needed to set some values to all the possible states that a group owns. Instead, just set the values of relevant states you need to change.
+
+\note I need to check the behavior of GL_NV_state_object vs. regular state machine
+
+\note currently the state groups do not use GL_NV_state_object. For now, a state group will simply set OpenGL states as usual.
+
+Here is an example on how to declare a state group :
+
+\code
+rasterization_state myRasterState
+{
+    POINT_SIZE            =1.0;
+    CULL_FACE             =FALSE;
+    CULL_FACE_MODE        =BACK;
+    FRONT_FACE            =CCW;
+    POLYGON_SMOOTH        =FALSE;
+    POLYGON_MODE          ={GL_FRONT_AND_BACK, GL_LINE};
+    POLYGON_OFFSET_FACTOR =0;
+    POLYGON_OFFSET_UNITS  =0;
+...
+}
+\endcode
+
+Same for Color Sample :
+
+\code
+color_sample_state csState
+{
+    ALPHA_TEST      =FALSE;
+    ALPHA_TEST_FUNC =ALWAYS;
+    ALPHA_TEST_REF  =0;
+...
+}
+\endcode
+
+And Depth Stencil :
+\code
+dst_state dstState
+{
+    DEPTH_TEST       =FALSE;
+    DEPTH_FUNC       =LESS;
+    DEPTH_WRITEMASK  =TRUE;
+...
+}
+\endcode
+
+\subsection ISG Invoking state groups
+
+These state groups can be invoked in passes by assigning a state-group to 
+ - DSTState
+ - RasterizationState
+ - ColorSampleState
+
+\code
+Pass myPass
+{
+    ...
+    DSTState           = dstState;
+    RasterizationState = rasterState;
+    ColorSampleState   = csState;
+}
+\endcode
+
+\note "State" at the end is optional  (DST[State]; Rasterization[State]…)
+
+**/
