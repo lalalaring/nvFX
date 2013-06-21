@@ -43,9 +43,9 @@ There is a Doxygen folder with more details. However I need to update the docume
 ## Comments on the code
 
 I tried to keep the code as simple as possible. It is difficult to stick to that because new features always added-up yet another set of code that made it more complicated than I expected.
-However, I tried on purpose to not get into crazy optimizations, so that it is still fine to step into the source code without getting too much lost. In other words, I didn't design so much the inside of nvFx. I figured-out that it could be done by whoever wants to adopt the concept of nvFx or done as another step in another branch.
+However, I tried on purpose to not get into crazy optimizations, so that it is still fine to step into the source code without getting too much lost. In other words, I didn't design so much the inside of nvFx and left some code non-optimized for the benefit of keeping it readable (example: iteration through pass-states). I figured-out that better optimizations could be done by whoever wants to adopt the concept of nvFx; or could be done as another step or in another branch...
 
-I decided to use the idea of Abstract classes as the API entry points. But I didn't push so far this sort of abstraction, to avoid *over-engineering* the whole project. So, the project is really C++ centric and thus can't be used from pure C project.
+I am using the idea of Abstract classes as the API entry points. But I didn't push so far this sort of abstraction, to avoid *over-engineering* the whole project. So, the project is really C++ centric and thus can't be used from pure C project.
 
 I am also aware that any Bison/Flex experts will have 'something to say' about the actual grammar... I have identified lots of things to fix and clean and will do it as soon as I have time. For now, this is working and at least is a good enough implementation.
 
