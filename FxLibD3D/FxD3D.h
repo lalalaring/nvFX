@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibD3D/FxD3D.h#4 $
-    $Date: 2013/06/19 $
-    $Revision: #4 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibD3D/FxD3D.h#5 $
+    $Date: 2013/06/20 $
+    $Revision: #5 $
     $Author: tlorach $
-    $Change: 16293553 $
+    $Change: 16301413 $
 */
 #ifndef __FXD3D_H__
 #define __FXD3D_H__

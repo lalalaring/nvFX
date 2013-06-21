@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/CstBuffer.cpp#5 $
-    $Date: 2013/06/19 $
-    $Revision: #5 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/CstBuffer.cpp#6 $
+    $Date: 2013/06/20 $
+    $Revision: #6 $
     $Author: tlorach $
-    $Change: 16292079 $
+    $Change: 16301413 $
 */
 #include <fstream>
 #include <assert.h>

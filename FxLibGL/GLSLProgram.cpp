@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibGL/GLSLProgram.cpp#9 $
-    $Date: 2013/06/19 $
-    $Revision: #9 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibGL/GLSLProgram.cpp#10 $
+    $Date: 2013/06/20 $
+    $Revision: #10 $
     $Author: tlorach $
-    $Change: 16293553 $
+    $Change: 16301413 $
 */
 #ifdef WIN32
 #include <windows.h> //for OutputDebugString

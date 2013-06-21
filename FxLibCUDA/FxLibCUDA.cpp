@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibCUDA/FxLibCUDA.cpp#4 $
-    $Date: 2013/06/19 $
-    $Revision: #4 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibCUDA/FxLibCUDA.cpp#5 $
+    $Date: 2013/06/20 $
+    $Revision: #5 $
     $Author: tlorach $
-    $Change: 16292079 $
+    $Change: 16301413 $
 */
 #   define  LOGI(...)  { printf(__VA_ARGS__); printf("\n"); }
 #   define  LOGE(...)  { printf(">>Error : "); printf(__VA_ARGS__); printf("\n"); }

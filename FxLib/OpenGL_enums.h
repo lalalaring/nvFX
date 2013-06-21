@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/OpenGL_enums.h#3 $
-    $Date: 2013/06/19 $
-    $Revision: #3 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/OpenGL_enums.h#4 $
+    $Date: 2013/06/20 $
+    $Revision: #4 $
     $Author: tlorach $
-    $Change: 16292079 $
+    $Change: 16301413 $
 */
 // Declaration of OpenGL enums for compatibility purpose.
 // the idea is to creation D3D states from OpenGL states when used from the API (or from nvFX code)

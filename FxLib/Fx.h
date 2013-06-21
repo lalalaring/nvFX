@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/Fx.h#14 $
-    $Date: 2013/06/19 $
-    $Revision: #14 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/Fx.h#15 $
+    $Date: 2013/06/20 $
+    $Revision: #15 $
     $Author: tlorach $
-    $Change: 16293553 $
+    $Change: 16301413 $
 */
 #ifndef __FX_H__
 #define __FX_H__

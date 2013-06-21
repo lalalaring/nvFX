@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/include/FxLib.h#10 $
-    $Date: 2013/06/19 $
-    $Revision: #10 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/include/FxLib.h#11 $
+    $Date: 2013/06/20 $
+    $Revision: #11 $
     $Author: tlorach $
-    $Change: 16292079 $
+    $Change: 16301413 $
 
     1.00 : build CL.13240315 6/12/2012 5:58pm
     1.01 : tlorach@nvidia.com : some optional CUDA support

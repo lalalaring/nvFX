@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibD3D/UniformD3D.cpp#2 $
-    $Date: 2013/06/19 $
-    $Revision: #2 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLibD3D/UniformD3D.cpp#3 $
+    $Date: 2013/06/20 $
+    $Revision: #3 $
     $Author: tlorach $
-    $Change: 16292079 $
+    $Change: 16301413 $
 */
 #ifdef WIN32
 #include <windows.h> // for OutputDebugString

@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/Uniform.cpp#11 $
-    $Date: 2013/06/19 $
-    $Revision: #11 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/Uniform.cpp#12 $
+    $Date: 2013/06/20 $
+    $Revision: #12 $
     $Author: tlorach $
-    $Change: 16292079 $
+    $Change: 16301413 $
 */
 #include <fstream>
 #include <assert.h>
