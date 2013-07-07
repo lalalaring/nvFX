@@ -25,11 +25,11 @@
 
     Please direct any questions to tlorach@nvidia.com (Tristan Lorach)
 
-    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/Pass.cpp#8 $
-    $Date: 2013/06/20 $
-    $Revision: #8 $
+    $Id: //sw/devrel/Playpen/tristan/GitHub/nvFX/FxLib/Pass.cpp#9 $
+    $Date: 2013/07/06 $
+    $Revision: #9 $
     $Author: tlorach $
-    $Change: 16301413 $
+    $Change: 16408260 $
 */
 #include <fstream>
 //#include <assert.h> //pas le droits aux assers
@@ -3022,11 +3022,12 @@ bool Pass::setupOverrides(ITechnique **dest, int numTechs)
     for(int i=0; i<numTechs; i++)
     {
         ITechnique *pT = dest[i];
-        for(int p=0; p<pT->getNumPasses(); p++)
-        {
-            IPass *pass = pT->getPass(p);
-            setupOverrides(&pass, 1);
-        }
+        if(pT)
+            for(int p=0; p<pT->getNumPasses(); p++)
+            {
+                IPass *pass = pT->getPass(p);
+                setupOverrides(&pass, 1);
+            }
     }
     return true;
 }
