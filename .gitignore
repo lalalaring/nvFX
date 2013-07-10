@@ -8,11 +8,10 @@ doxygen/nvFX.chm
 doxygen/log.txt
 samples/OpenGLSimpleMDLEffect
 ISF
-nvFx_GTC_2013.pptx
+*.pptx
 Log_nvFX.txt
 *Log.txt
 Video
-S3341_nvFx_Tristan_Lorach.pptx
 
 #################
 ## Eclipse

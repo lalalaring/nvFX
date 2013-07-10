@@ -463,14 +463,18 @@ bool CstBufferGL::updateFromUniforms(bool bForceUpdating)
 #ifndef OGLES2
     if(m_bufferId <= 0)
         return false;
+    bool bDidBind = false;
 #ifdef USEBUFFERSUBDATA
     NXPROFILEFUNCCOL2("upd.BufferSubData", COLOR_RED2, 11);
-    glBindBuffer(GL_UNIFORM_BUFFER, m_bufferId);
     for(int u=0; u<(int)m_uniforms.size(); u++)
     {
         Uniform* pU = m_uniforms[u];
         if(pU->getDirty(NULL))
         {
+            if(!bDidBind) {
+                glBindBuffer(GL_UNIFORM_BUFFER, m_bufferId);
+                bDidBind = true;
+            }
             // we expect ONE target
             int offset = pU->m_targets[0].offsetBytes;
             int szBytes = 0;
@@ -481,15 +485,19 @@ bool CstBufferGL::updateFromUniforms(bool bForceUpdating)
         }
         pU->setDirty(false, NULL);
     }
-    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    if(bDidBind)
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
 #elif defined(USEMAPRANGE)
     NXPROFILEFUNCCOL2("upd.BufferSubData", COLOR_RED2, 11);
-    glBindBuffer(GL_UNIFORM_BUFFER, m_bufferId);
     for(int u=0; u<(int)m_uniforms.size(); u++)
     {
         Uniform* pU = m_uniforms[u];
         if(pU->getDirty(NULL))
         {
+            if(!bDidBind) {
+                glBindBuffer(GL_UNIFORM_BUFFER, m_bufferId);
+                bDidBind = true;
+            }
             // we expect ONE target
 #pragma MESSAGE(__FILE__"(416) : TODO TODO TODO TODO : Warning... offset could be wrong in special cases. Need to test more")
             int offset = pU->m_targets[0].offsetBytes;
@@ -511,7 +519,8 @@ bool CstBufferGL::updateFromUniforms(bool bForceUpdating)
         }
         pU->setDirty(false, NULL);
     }
-    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    if(bDidBind)
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
 #else
     NXPROFILEFUNCCOL2("upd.MapBuffer", COLOR_RED2, 11);
     //

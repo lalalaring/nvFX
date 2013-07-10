@@ -301,11 +301,11 @@ int Uniform::getNumTargets(TargetType t)
     a = b;
 IUniform*    Uniform::setValue1f(float f)
 {
-    SETTYPE(m_type, Uniform::TFloat);
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TFloat, 1, NULL)))
         m_data = m_data->allocate(IUniform::TFloat, 1);
-    else if(m_data->fvals[0] == f)
+    else if((m_data->fvals[0] == f)&&(m_type == Uniform::TFloat))
         return this;
+    SETTYPE(m_type, Uniform::TFloat);
     m_data->fvals[0] = f;
     int tsz = (int)m_targets.size();
     for(int i=0; i<tsz;i++)
@@ -317,7 +317,7 @@ IUniform*    Uniform::setValue2f(float f1, float f2)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TVec2, 1, NULL)))
         m_data = m_data->allocate(IUniform::TVec2, 1);
-    else if((m_data->fvals[0] == f1)&&(m_data->fvals[1] == f2))
+    else if((m_data->fvals[0] == f1)&&(m_data->fvals[1] == f2)&&(m_type == Uniform::TVec2))
         return this;
     SETTYPE(m_type, Uniform::TVec2);
     m_data->fvals[0] = f1; m_data->fvals[1] = f2;
@@ -331,7 +331,7 @@ IUniform*    Uniform::setValue3f(float f1, float f2, float f3)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TVec3, 1, NULL)))
         m_data = m_data->allocate(IUniform::TVec3, 1);
-    else if((m_data->fvals[0] == f1)&&(m_data->fvals[1] == f2)&&(m_data->fvals[2] == f3))
+    else if((m_data->fvals[0] == f1)&&(m_data->fvals[1] == f2)&&(m_data->fvals[2] == f3)&&(m_type == Uniform::TVec3))
         return this;
     SETTYPE(m_type, Uniform::TVec3);
     m_data->fvals[0] = f1; m_data->fvals[1] = f2; m_data->fvals[2] = f3;
@@ -345,7 +345,8 @@ IUniform*    Uniform::setValue4f(float f1, float f2, float f3, float f4)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TVec4, 1, NULL)))
         m_data = m_data->allocate(IUniform::TVec4, 1);
-    else if((m_data->fvals[0] == f1)&&(m_data->fvals[1] == f2)&&(m_data->fvals[2] == f3)&&(m_data->fvals[3] == f4))
+    else if((m_data->fvals[0] == f1)&&(m_data->fvals[1] == f2)&&(m_data->fvals[2] == f3)&&(m_data->fvals[3] == f4)
+        &&(m_type == Uniform::TVec4) )
         return this;
     SETTYPE(m_type, Uniform::TVec4);
     m_data->fvals[0] = f1; m_data->fvals[1] = f2; m_data->fvals[2] = f3; m_data->fvals[3] = f4; 
@@ -359,7 +360,7 @@ IUniform*    Uniform::setValue1fv(float *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TFloat, 1, NULL)))
         m_data = m_data->allocate(IUniform::TFloat, 1);
-    else if(!memcmp(m_data, pf, sizeof(float)))
+    else if((memcmp(m_data->fvals, pf, sizeof(float))==0)&&(m_type == Uniform::TFloat))
         return this;
     SETTYPE(m_type, Uniform::TFloat);
     memcpy(m_data->fvals, pf, sizeof(float));
@@ -373,7 +374,7 @@ IUniform*    Uniform::setValue2fv(float *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TVec2, 1, NULL)))
         m_data = m_data->allocate(IUniform::TVec2, 1);
-    else if(!memcmp(m_data, pf, sizeof(float)*2))
+    else if((memcmp(m_data->fvals, pf, sizeof(float)*2)==0)&&(m_type == Uniform::TVec2))
         return this;
     SETTYPE(m_type, Uniform::TVec2);
     memcpy(m_data->fvals, pf, sizeof(float)*2);
@@ -387,7 +388,7 @@ IUniform*    Uniform::setValue3fv(float *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TVec3, 1, NULL)))
         m_data = m_data->allocate(IUniform::TVec3, 1);
-    else if(!memcmp(m_data, pf, sizeof(float)*3))
+    else if((memcmp(m_data->fvals, pf, sizeof(float)*3)==0)&&(m_type == Uniform::TVec3))
         return this;
     SETTYPE(m_type, Uniform::TVec3);
     memcpy(m_data->fvals, pf, sizeof(float)*3);
@@ -401,7 +402,7 @@ IUniform*    Uniform::setValue4fv(float *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TVec4, 1, NULL)))
         m_data = m_data->allocate(IUniform::TVec4, 1);
-    else if(!memcmp(m_data, pf, sizeof(float)*4))
+    else if((memcmp(m_data->fvals, pf, sizeof(float)*4)==0)&&(m_type == Uniform::TVec4))
         return this;
     SETTYPE(m_type, Uniform::TVec4);
     memcpy(m_data->fvals, pf, sizeof(float)*4);
@@ -434,7 +435,7 @@ IUniform*    Uniform::setValue1i(int f)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt, 1);
-    else if((m_data->ivals[0] == f))
+    else if((m_data->ivals[0] == f)&&(m_type == Uniform::TInt))
         return this;
     SETTYPE(m_type, Uniform::TInt);
     m_data->ivals[0] = f;
@@ -448,7 +449,7 @@ IUniform*    Uniform::setValue2i(int f1, int f2)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt2, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt2, 1);
-    else if((m_data->ivals[0] == f1)&&(m_data->ivals[1] == f2))
+    else if((m_data->ivals[0] == f1)&&(m_data->ivals[1] == f2)&&(m_type == Uniform::TInt2))
         return this;
     SETTYPE(m_type, Uniform::TInt2);
     m_data->ivals[0] = f1; m_data->ivals[1] = f2;
@@ -462,7 +463,7 @@ IUniform*    Uniform::setValue3i(int f1, int f2, int f3)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt3, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt3, 1);
-    else if((m_data->ivals[0] == f1)&&(m_data->ivals[1] == f2)&&(m_data->ivals[2] == f3))
+    else if((m_data->ivals[0] == f1)&&(m_data->ivals[1] == f2)&&(m_data->ivals[2] == f3)&&(m_type == Uniform::TInt3))
         return this;
     SETTYPE(m_type, Uniform::TInt3);
     m_data->ivals[0] = f1; m_data->ivals[1] = f2; m_data->ivals[2] = f3;
@@ -476,7 +477,7 @@ IUniform*    Uniform::setValue4i(int f1, int f2, int f3, int f4)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt4, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt4, 1);
-    else if((m_data->ivals[0] == f1)&&(m_data->ivals[1] == f2)&&(m_data->ivals[2] == f3)&&(m_data->ivals[3] == f4))
+    else if((m_data->ivals[0] == f1)&&(m_data->ivals[1] == f2)&&(m_data->ivals[2] == f3)&&(m_data->ivals[3] == f4)&&(m_type == Uniform::TInt4))
         return this;
     SETTYPE(m_type, Uniform::TInt4);
     m_data->ivals[0] = f1; m_data->ivals[1] = f2; m_data->ivals[2] = f3; m_data->ivals[3] = f4;
@@ -490,7 +491,7 @@ IUniform*    Uniform::setValue1iv(int *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt, 1);
-    else if(!memcmp(m_data, pf, sizeof(int)))
+    else if((memcmp(m_data->fvals, pf, sizeof(float))==0)&&(m_type == Uniform::TInt))
         return this;
     SETTYPE(m_type, Uniform::TInt);
     memcpy(m_data->fvals, pf, sizeof(int)*1);
@@ -504,7 +505,7 @@ IUniform*    Uniform::setValue2iv(int *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt2, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt2, 1);
-    else if(!memcmp(m_data, pf, sizeof(int)*2))
+    else if((memcmp(m_data->fvals, pf, sizeof(float)*2)==0)&&(m_type == Uniform::TInt2))
         return this;
     SETTYPE(m_type, Uniform::TInt2);
     memcpy(m_data->fvals, pf, sizeof(int)*2);
@@ -518,7 +519,7 @@ IUniform*    Uniform::setValue3iv(int *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt3, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt3, 1);
-    else if(!memcmp(m_data, pf, sizeof(int)*3))
+    else if((memcmp(m_data->fvals, pf, sizeof(float)*3)==0)&&(m_type == Uniform::TInt3))
         return this;
     SETTYPE(m_type, Uniform::TInt3);
     memcpy(m_data->fvals, pf, sizeof(int)*3);
@@ -532,7 +533,7 @@ IUniform*    Uniform::setValue4iv(int *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TInt4, 1, NULL)))
         m_data = m_data->allocate(IUniform::TInt4, 1);
-    else if(!memcmp(m_data, pf, sizeof(int)*4))
+    else if((memcmp(m_data->fvals, pf, sizeof(float)*4)==0)&&(m_type == Uniform::TInt4))
         return this;
     SETTYPE(m_type, Uniform::TInt4);
     memcpy(m_data->fvals, pf, sizeof(int)*4);
@@ -550,7 +551,7 @@ IUniform*    Uniform::setValueiv(int *pf, int dim, int nVecs, int offsetVec)
     m_type = (Uniform::Type)((int)Uniform::TInt + dim - 1);
     if((m_data == NULL)||(m_data->tooSmall(m_type, nVecs, NULL)))
         m_data = m_data->allocate(m_type, nVecs);
-    else if(!memcmp(m_data + (dim*offsetVec), pf, sizeof(int)*dim*nVecs))
+    else if(!memcmp(m_data->fvals + (dim*offsetVec), pf, sizeof(int)*dim*nVecs))
         return this;
     // set the amount of items
     m_arraySz = nVecs + offsetVec;
@@ -567,7 +568,7 @@ IUniform*    Uniform::setValue1b(bool f)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool, 1);
-    else if((m_data->bvals[0] == f))
+    else if((m_data->bvals[0] == f) && (m_type == Uniform::TBool))
         return this;
     SETTYPE(m_type, Uniform::TBool);
     m_data->bvals[0] = f;
@@ -581,7 +582,7 @@ IUniform*    Uniform::setValue2b(bool f1, bool f2)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool2, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool2, 1);
-    else if((m_data->bvals[0] == f1)&&(m_data->bvals[1] == f2))
+    else if((m_data->bvals[0] == f1)&&(m_data->bvals[1] == f2) && (m_type == Uniform::TBool2))
         return this;
     SETTYPE(m_type, Uniform::TBool2);
     m_data->bvals[0] = f1; m_data->bvals[1] = f2;
@@ -595,7 +596,7 @@ IUniform*    Uniform::setValue3b(bool f1, bool f2, bool f3)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool3, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool3, 1);
-    else if((m_data->bvals[0] == f1)&&(m_data->bvals[1] == f2)&&(m_data->bvals[2] == f3))
+    else if((m_data->bvals[0] == f1)&&(m_data->bvals[1] == f2)&&(m_data->bvals[2] == f3) && (m_type == Uniform::TBool3))
         return this;
     SETTYPE(m_type, Uniform::TBool3);
     m_data->bvals[0] = f1; m_data->bvals[1] = f2; m_data->bvals[2] = f3;
@@ -609,7 +610,7 @@ IUniform*    Uniform::setValue4b(bool f1, bool f2, bool f3, bool f4)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool4, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool4, 1);
-    else if((m_data->bvals[0] == f1)&&(m_data->bvals[1] == f2)&&(m_data->bvals[2] == f3)&&(m_data->bvals[3] == f4))
+    else if((m_data->bvals[0] == f1)&&(m_data->bvals[1] == f2)&&(m_data->bvals[2] == f3)&&(m_data->bvals[3] == f4) && (m_type == Uniform::TBool4))
         return this;
     SETTYPE(m_type, Uniform::TBool4);
     m_data->bvals[0] = f1; m_data->bvals[1] = f2; m_data->bvals[2] = f3; m_data->bvals[3] = f4;
@@ -623,7 +624,7 @@ IUniform*    Uniform::setValue1bv(bool *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool, 1);
-    else if(!memcmp(m_data, pf, sizeof(bool)))
+    else if((!memcmp(m_data->bvals, pf, sizeof(bool))) && (m_type == Uniform::TBool))
         return this;
     SETTYPE(m_type, Uniform::TBool);
     memcpy(m_data->bvals, pf, sizeof(bool)*1);
@@ -637,7 +638,7 @@ IUniform*    Uniform::setValue2bv(bool *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool2, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool2, 1);
-    else if(!memcmp(m_data, pf, sizeof(bool)*2))
+    else if((!memcmp(m_data->bvals, pf, sizeof(bool))) && (m_type == Uniform::TBool2))
         return this;
     SETTYPE(m_type, Uniform::TBool2);
     memcpy(m_data->bvals, pf, sizeof(bool)*2);
@@ -651,7 +652,7 @@ IUniform*    Uniform::setValue3bv(bool *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool3, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool3, 1);
-    else if(!memcmp(m_data, pf, sizeof(bool)*3))
+    else if((!memcmp(m_data->bvals, pf, sizeof(bool))) && (m_type == Uniform::TBool3))
         return this;
     SETTYPE(m_type, Uniform::TBool3);
     memcpy(m_data->bvals, pf, sizeof(bool)*3);
@@ -665,7 +666,7 @@ IUniform*    Uniform::setValue4bv(bool *pf)
 {
     if((m_data == NULL)||(m_data->tooSmall(IUniform::TBool4, 1, NULL)))
         m_data = m_data->allocate(IUniform::TBool4, 1);
-    else if(!memcmp(m_data, pf, sizeof(bool)*4))
+    else if((!memcmp(m_data->bvals, pf, sizeof(bool))) && (m_type == Uniform::TBool4))
         return this;
     SETTYPE(m_type, Uniform::TBool4);
     memcpy(m_data->bvals, pf, sizeof(bool)*4);
